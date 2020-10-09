@@ -177,12 +177,12 @@ body {
 	width: 100%;
 	padding: 20px;
 	display: flex;
+	flex-flow: row wrap;
 	border-radius: 5px;
 	box-shadow: 0 1px 6px -2px #000;
 	background-color: #fff;
 	margin-bottom: 30px;
 	position: relative;
-	display: flex;
 }
 
 .card img {
@@ -190,6 +190,7 @@ body {
 	height: 150px;
 	border-radius: 3px;
 	margin-right: 20px;
+	display: inline-block;
 }
 
 .card .name {
@@ -219,7 +220,13 @@ body {
 	cursor: pointer;
 }
 
+.cardInfo {
+	width: 70%;
+}
+
 .con {
 	width: 100%;
-	background: black;
+	height: 200px;
+	margin: 3rem 0;
+	background: red;
 }

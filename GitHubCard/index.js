@@ -102,11 +102,13 @@ function makeCard(data) {
 	button.classList.add('btn');
 	h3.classList.add('name');
 	username.classList.add('username');
-	contribution.classList.add('con');
+	// contribution.classList.add('con');
+	cardInfo.classList.add('cardInfo')
 
 	//adding textContent
 	h3.textContent = data['name'];
 	username.textContent = data['login'];
+	location.textContent = `Location: ${data['location']}`;
 	profile.textContent = 'Profile: ';
 	followers.textContent = `Followers: ${data['followers']}`;
 	following.textContent = `Following: ${data['following']}`;
@@ -131,10 +133,12 @@ function makeCard(data) {
 	cardInfo.appendChild(following);
 
 	card.appendChild(button);
-	// card.appendChild(contribution);
+	card.appendChild(contribution);
 
 	//event listener
-	button.addEventListener;
+	button.addEventListener('click', (e) => {
+		contribution.classList.toggle('con')
+	});
 	return card;
 }
 
