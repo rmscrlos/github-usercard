@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
@@ -87,7 +86,7 @@ function makeCard(data) {
 	const img = document.createElement('img');
 	const cardInfo = document.createElement('div');
 	const button = document.createElement('button');
-	const contribution = document.createElement('div');
+	const repo = document.createElement('div');
 	const h3 = document.createElement('h3');
 	let username = document.createElement('p');
 	const location = document.createElement('p');
@@ -96,13 +95,16 @@ function makeCard(data) {
 	const followers = document.createElement('p');
 	const following = document.createElement('p');
 	const bio = document.createElement('p');
+	const repoText = document.createElement('p')
+	const repoLink = document.createElement('a');
+	
 
 	//add class
 	card.classList.add('card');
 	button.classList.add('btn');
 	h3.classList.add('name');
 	username.classList.add('username');
-	// contribution.classList.add('con');
+	// contribution.classList.add('calendar');
 	cardInfo.classList.add('cardInfo')
 
 	//adding textContent
@@ -115,10 +117,12 @@ function makeCard(data) {
 	bio.textContent = `Bio: ${data['bio']}`;
 	a.textContent = 'Git Handle';
 	button.textContent = 'MORE';
+	
 
 	//assigning values to elements
 	img.src = data['avatar_url'];
 	a.href = data['html_url'];
+	repoLink.href = data['repos_url'];
 
 	//appending elements
 	card.appendChild(img);
@@ -131,14 +135,33 @@ function makeCard(data) {
 	cardInfo.appendChild(bio);
 	cardInfo.appendChild(followers);
 	cardInfo.appendChild(following);
-
+	
 	card.appendChild(button);
-	card.appendChild(contribution);
+	card.appendChild(repo);
+	repo.appendChild(repoText);
+	repo.appendChild(repoLink);
+	
+	// repolink styles
+	repoLink.style.display = 'none';
+	repoLink.style.fontSize = '1.5rem';
+	
+	
 
 	//event listener
-	button.addEventListener('click', (e) => {
-		contribution.classList.toggle('con')
+	button.addEventListener('click', () => {
+		repo.classList.toggle('repo');
+		repoLink.textContent = 'Repos';
+		repoText.textContent = `Hello There! \n Here is a link to my repos:`;
+
+		if(repoText.style.display === 'block'){
+			repoText.style.display = 'none';
+			repoLink.style.display = 'none'
+		} else {
+			repoText.style.display = 'block'
+			repoLink.style.display = 'block'
+		}
 	});
+
 	return card;
 }
 
