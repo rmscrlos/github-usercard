@@ -1,8 +1,18 @@
+import axios from 'axios';
+
 /*
   STEP 1: using axios, send a GET request to the following URL
     (replacing the placeholder with your Github name):
     https://api.github.com/users/<your name>
 */
+// const myHub = axios
+// 	.get('https://api.github.com/users/rmscrlos')
+// 	.then((r) => {
+// 		let prof = makeCard(r.data);
+// 		cards.appendChild(prof);
+// 		console.log(r.data);
+// 	})
+// 	.catch((err) => console.log(err));
 
 /*
   STEP 2: Inspect and study the data coming back, this is YOUR
@@ -12,6 +22,7 @@
     Skip to STEP 3.
 */
 
+// console.log(myHub);
 /*
   STEP 4: Pass the data received from Github into your function,
     and append the returned markup to the DOM as a child of .cards
@@ -28,7 +39,27 @@
     user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = [
+	'https://api.github.com/users/rmscrlos',
+	'https://api.github.com/users/tetondan',
+	'https://api.github.com/users/dustinmyers',
+	'https://api.github.com/users/justsml',
+	'https://api.github.com/users/luishrd',
+	'https://api.github.com/users/bigknell'
+];
+
+const others = followersArray.forEach((e) => {
+	axios
+		.get(e)
+		.then((r) => {
+			let others = makeCard(r.data);
+			cards.appendChild(others);
+			console.log(r.data);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
 
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
@@ -50,6 +81,65 @@ const followersArray = [];
     </div>
 */
 
+function makeCard(data) {
+	// creating elements
+	const card = document.createElement('div');
+	const img = document.createElement('img');
+	const cardInfo = document.createElement('div');
+	const button = document.createElement('button');
+	const contribution = document.createElement('div');
+	const h3 = document.createElement('h3');
+	let username = document.createElement('p');
+	const location = document.createElement('p');
+	const profile = document.createElement('p');
+	const a = document.createElement('a');
+	const followers = document.createElement('p');
+	const following = document.createElement('p');
+	const bio = document.createElement('p');
+
+	//add class
+	card.classList.add('card');
+	button.classList.add('btn');
+	h3.classList.add('name');
+	username.classList.add('username');
+	contribution.classList.add('con');
+
+	//adding textContent
+	h3.textContent = data['name'];
+	username.textContent = data['login'];
+	profile.textContent = 'Profile: ';
+	followers.textContent = `Followers: ${data['followers']}`;
+	following.textContent = `Following: ${data['following']}`;
+	bio.textContent = `Bio: ${data['bio']}`;
+	a.textContent = 'Git Handle';
+	button.textContent = 'MORE';
+
+	//assigning values to elements
+	img.src = data['avatar_url'];
+	a.href = data['html_url'];
+
+	//appending elements
+	card.appendChild(img);
+	card.appendChild(cardInfo);
+	cardInfo.appendChild(h3);
+	cardInfo.appendChild(username);
+	cardInfo.appendChild(location);
+	cardInfo.append(profile);
+	profile.appendChild(a);
+	cardInfo.appendChild(bio);
+	cardInfo.appendChild(followers);
+	cardInfo.appendChild(following);
+
+	card.appendChild(button);
+	// card.appendChild(contribution);
+
+	//event listener
+	button.addEventListener;
+	return card;
+}
+
+const cards = document.querySelector('.cards');
+
 /*
   List of LS Instructors Github username's:
     tetondan
@@ -58,3 +148,5 @@ const followersArray = [];
     luishrd
     bigknell
 */
+
+// Stretch
